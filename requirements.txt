@@ -1,0 +1,8 @@
+mysql-connector-python
+sqlalchemy
+pymysql[rsa]
+pandas
+numpy
+boto3
+cryptography
+pytest
