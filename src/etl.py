@@ -5,7 +5,9 @@ import datetime
 import io
 from config import *
 
-conn_str = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+creds=get_db_credentials()
+conn_str = f"mysql+pymysql://{creds["user"]}:{creds["password"]}@{creds["host"]}:{creds["port"]}/{creds["dbname"]}"
 engine = create_engine(conn_str)
 
 def get_s3_client():
