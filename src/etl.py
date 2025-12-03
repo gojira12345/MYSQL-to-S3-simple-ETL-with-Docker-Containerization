@@ -47,7 +47,7 @@ def transform_add_unique_col(df:pd.DataFrame)->pd.DataFrame:
 def load(df:pd.DataFrame):
     s3 = get_s3_client()
     bucket = "databuckett12345"
-    key = "output_tbl.csv"+ str(datetime.datetime.now())
+    key = "output_tbl_"+ str(datetime.datetime.now())+".csv"
     csv_buf = io.StringIO()
     df.to_csv(csv_buf, index=False)
     s3.put_object(Bucket=bucket, Key=key, Body=csv_buf.getvalue())   
