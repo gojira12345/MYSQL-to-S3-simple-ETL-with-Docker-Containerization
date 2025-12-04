@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine,text
 import pandas as pd
+import numpy as np
 import boto3
 import datetime
 import io
@@ -40,6 +41,13 @@ def transform_add_unique_col(df:pd.DataFrame)->pd.DataFrame:
    df_out["unique_col"]=df_out["name"].str[0]+df["id"].astype('str')
    return df_out  
 
+def transform_add_age_bracket(df:pd.DataFrame)-> pd.DataFrame:
+    df_out=df.copy()
+    df_out["age_bracket"]=np.where(df["age"]<=25,"junior","senior")
+    return df_out
+        
+
+
 
 
 
@@ -61,7 +69,8 @@ def main():
     print(df_transformed_1)
     df_transformed_2=transform_add_unique_col(df_transformed_1)
     print(df_transformed_2)
-    load(df_transformed_2)
+    df_transformed_3=transform_add_age_bracket(df_transformed_2)
+    load(df_transformed_3)
 
 if __name__=="__main__":
     main()    
